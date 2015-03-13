@@ -44,3 +44,58 @@ app.get('/login', function(req, res)
         res.end();
     });
 });
+
+// List tables
+app.get('/table', function(req, res)
+{
+
+});
+
+// Create a new table
+app.post('/table', function(req, res)
+{
+
+});
+
+// List data from a table
+app.get('/:table', function(req, res)
+{
+
+});
+
+// Add data to a table
+app.post('/:table', function(req, res)
+{
+
+});
+
+// Return a sorted list of data from a table
+app.get('/:table/sort/:key/:order?', function(req, res)
+{
+
+});
+
+// Return a list of data that matches the search term
+app.get('/:table/search/:query', function(req, res)
+{
+
+});
+
+// Get specific information from a table
+app.get('/:table/:id', function(req, res)
+{
+
+});
+
+// Edit data in a table
+app.put('/:table/:id', function(req, res)
+{
+
+});
+
+// Delete something from a table
+app.delete('/:table/:id', function(req, res)
+{
+
+});
+
