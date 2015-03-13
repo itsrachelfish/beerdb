@@ -1,0 +1,32 @@
+{
+    "name": "beerdb",
+    "version": "0.0.1",
+    "description": "A database for beer stuff",
+    "author": "Rachel Fish <rachel@wetfish.net>",
+
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/itsrachelfish/beerdb"
+    },
+    
+    "bugs":
+    {
+        "url": "https://github.com/itsrachelfish/beerdb/issues"
+    },
+    
+    "keywords":
+    [
+        "beer",
+        "database"
+    ],
+    
+    "dependencies":
+    {
+        "express": "*",
+        "redis": "*",
+        "mysql": "*",
+        "express-session": "*",
+        "connect-redis": "*"
+    }
+}
