@@ -1,1 +1,41 @@
-Mmm... beer!
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>BeerDB</title>
+
+        <!-- jQuery -->
+        <script src="/vendor/jquery-1.11.1.min.js"></script>
+
+        <!-- Twitter bootstrap -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">
+        <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Custom scripts -->
+        <script src="/js/beer.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            Mmm... beer!
+
+            <div class="create">
+                <h1>Create a new table</h1>
+                
+                <form action="/table" method="post">
+                    Table Name:
+
+                    Columns:
+                     - Column Name:
+                     - Type:
+                      - Label (used for sorting)
+                      - Text (searchable blocks of text)
+                      - List (searchable blocks of text, but specifically in list format)
+                      - Number (used for single numbers)
+                      - Range (used for ranges of numbers)
+                </form>
+            </div>
+        </div> <!-- /container -->
+    </body>
+</html>
