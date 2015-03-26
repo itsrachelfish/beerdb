@@ -20,20 +20,39 @@
         <div class="container">
             Mmm... beer!
 
-            <div class="create">
-                <h1>Create a new table</h1>
-                
-                <form action="/table" method="post">
-                    Table Name:
+            <div class="create">                
+                <form action="/table" method="post" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Table</label>
+                        <div class="col-sm-9">
+                            <input name="table" class="form-control" placeholder="A name for your new table">
+                        </div>
+                    </div>
 
-                    Columns:
-                     - Column Name:
-                     - Type:
-                      - Label (used for sorting)
-                      - Text (searchable blocks of text)
-                      - List (searchable blocks of text, but specifically in list format)
-                      - Number (used for single numbers)
-                      - Range (used for ranges of numbers)
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Column</label>
+                        <div class="col-sm-5">
+                            <input name="column" class="form-control"  value="A column in your table">
+                        </div>
+
+                        <div class="col-sm-3">
+                            <select name="type" class="form-control" value="{{user_data.birth.year}}">
+                                <option value="">Type</option>
+
+                                <option value="label">Label (used for sorting)</option>
+                                <option value="text">Text (searchable blocks of text)</option>
+                                <option value="list">List (like text, but specifically in list format)</option>
+                                <option value="number">Number (used for single numbers)</option>
+                                <option value="range">Range (used for ranges of numbers)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <input type="submit" value="Create Table" class="btn btn-primary">
+                        </div>
+                    </div>
                 </form>
             </div>
         </div> <!-- /container -->
