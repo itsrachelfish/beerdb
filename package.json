@@ -19,7 +19,8 @@
     "redis": "*",
     "mysql": "*",
     "express-session": "*",
-    "connect-redis": "*"
+    "connect-redis": "*",
+    "jquery": "~2.1.3"
   },
   "devDependencies": {
     "gulp": "~3.8.11",

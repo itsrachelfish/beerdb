@@ -22,14 +22,16 @@
 
             <div class="create">                
                 <form action="/table" method="post" class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Table</label>
-                        <div class="col-sm-9">
-                            <input name="table" class="form-control" placeholder="A name for your new table">
+                    <div class="form-content">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Table</label>
+                            <div class="col-sm-9">
+                                <input name="table" class="form-control" placeholder="A name for your new table">
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
+                    
+                    <div class="form-group column-template hidden">
                         <label class="col-sm-3 control-label">Column</label>
                         <div class="col-sm-5">
                             <input name="column" class="form-control"  value="A column in your table">
@@ -48,7 +50,7 @@
                         </div>
 
                         <div class="col-sm-1">
-                            <span class="glyphicon glyphicon-plus" style="color:green" title="Add another column"></span>
+                            <span class="glyphicon glyphicon-plus add-column" style="color:green" title="Add another column"></span>
                             <span class="glyphicon glyphicon-sort" style="color:blue" title="Move this column"></span>
                             <span class="glyphicon glyphicon-remove" style="color:red" title="Remove this column"></span>
                         </div>
@@ -56,6 +58,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
+                            <input type="button" value="Add Column" class="btn btn-success add-column">
                             <input type="submit" value="Create Table" class="btn btn-primary">
                         </div>
                     </div>
