@@ -7,4 +7,12 @@ $(document).ready(function()
 
         $('.form-content').append(template);
     });
+
+    $('body').on('click', '.remove-column', function(event)
+    {
+        $(this).parents('.form-group').fadeOut(function()
+        {
+            $(this).remove();
+        });
+    });
 });
