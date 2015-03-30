@@ -32,16 +32,18 @@
                                 <input name="table" class="form-control" placeholder="A name for your new table">
                             </div>
                         </div>
+
+                        <div class="form-group movable">&nbsp;</div>
                     </div>
                     
-                    <div class="form-group column-template hidden">
+                    <div class="form-group movable column-template hidden">
                         <label class="col-sm-3 control-label">Column</label>
                         <div class="col-sm-5">
                             <input name="column" class="form-control" placeholder="A column in your table">
                         </div>
 
                         <div class="col-sm-3">
-                            <select name="type" class="form-control" value="{{user_data.birth.year}}">
+                            <select name="type" class="form-control">
                                 <option value="">Type</option>
 
                                 <option value="label">Label (used for sorting)</option>

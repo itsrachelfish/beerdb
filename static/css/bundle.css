@@ -1,2 +1,8 @@
 .moving {
   background-color: #ccc; }
+
+.movable {
+  border-bottom: 1px solid #fff; }
+
+.movable.hovering {
+  border-bottom: 1px solid #00f; }
