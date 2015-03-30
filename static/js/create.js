@@ -4,7 +4,7 @@ $(document).ready(function()
     {
         var template = $('.column-template').clone();
         template.removeClass('column-template hidden');
-
+        template.addClass('movable');
         $('.form-content').append(template);
     });
 
@@ -22,7 +22,7 @@ $(document).ready(function()
     {
         event.preventDefault();
         
-        var parent = $(this).parents('.form-group')
+        var parent = $(this).parents('.movable')
         parent.addClass('moving');
 
         moving = true;
@@ -44,7 +44,7 @@ $(document).ready(function()
         }
     });
 
-    $('body').on('mouseenter', '.form-group', function(event)
+    $('body').on('mouseenter', '.movable', function(event)
     {
         if(moving)
         {
@@ -52,7 +52,7 @@ $(document).ready(function()
         }
     });
 
-    $('body').on('mouseleave', '.form-group', function(event)
+    $('body').on('mouseleave', '.movable', function(event)
     {
         if(moving)
         {
