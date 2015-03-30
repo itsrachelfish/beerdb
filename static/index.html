@@ -14,6 +14,9 @@
 
         <!-- Custom scripts -->
         <script src="/js/bundle.js"></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/css/bundle.css">
     </head>
 
     <body>
@@ -34,7 +37,7 @@
                     <div class="form-group column-template hidden">
                         <label class="col-sm-3 control-label">Column</label>
                         <div class="col-sm-5">
-                            <input name="column" class="form-control"  value="A column in your table">
+                            <input name="column" class="form-control" placeholder="A column in your table">
                         </div>
 
                         <div class="col-sm-3">
@@ -51,7 +54,7 @@
 
                         <div class="col-sm-1">
                             <span class="glyphicon glyphicon-plus add-column" style="color:green" title="Add another column"></span>
-                            <span class="glyphicon glyphicon-sort" style="color:blue" title="Move this column"></span>
+                            <span class="glyphicon glyphicon-sort move-column" style="color:blue" title="Move this column"></span>
                             <span class="glyphicon glyphicon-remove remove-column" style="color:red" title="Remove this column"></span>
                         </div>
                     </div>

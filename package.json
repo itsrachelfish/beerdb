@@ -28,6 +28,7 @@
     "vinyl-source-stream": "~1.1.0",
     "vinyl-buffer": "~1.0.0",
     "watchify": "~2.6.2",
-    "browserify": "~9.0.3"
+    "browserify": "~9.0.3",
+    "node-sass": "~2.1.1"
   }
 }
