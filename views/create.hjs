@@ -1,0 +1,49 @@
+{{> head}}
+    {{> sidebar}}
+
+    <div class="create">
+        <form action="/table" method="post" class="form-horizontal" role="form">
+            <div class="form-content">
+                <div class="form-group movable">
+                    <label class="col-sm-3 control-label">Table</label>
+                    <div class="col-sm-9">
+                        <input name="table" class="form-control" placeholder="A name for your new table">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group column-template hidden">
+                <label class="col-sm-3 control-label">Column</label>
+                <div class="col-sm-5">
+                    <input name="column" class="form-control" placeholder="A column in your table">
+                </div>
+
+                <div class="col-sm-3">
+                    <select name="type" class="form-control">
+                        <option value="">Type</option>
+
+                        <option value="label">Label (used for sorting)</option>
+                        <option value="text">Text (searchable blocks of text)</option>
+                        <option value="list">List (like text, but specifically in list format)</option>
+                        <option value="number">Number (used for single numbers)</option>
+                        <option value="range">Range (used for ranges of numbers)</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-1">
+                    <span class="glyphicon glyphicon-plus add-column" style="color:green" title="Add another column"></span>
+                    <span class="glyphicon glyphicon-sort move-column" style="color:blue" title="Move this column"></span>
+                    <span class="glyphicon glyphicon-remove remove-column" style="color:red" title="Remove this column"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input type="button" value="Add Column" class="btn btn-success add-column">
+                    <input type="submit" value="Create Table" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{{> foot}}

@@ -30,6 +30,6 @@ app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hjs');
 
-require('./src/login')(app);
-require('./src/pages')(app);
-require('./src/rest')(app);
+require('./routes/login')(app);
+require('./routes/pages')(app);
+require('./routes/rest')(app);

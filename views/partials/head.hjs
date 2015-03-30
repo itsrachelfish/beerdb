@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>BeerDB</title>
+
+        <!-- jQuery -->
+        <script src="/vendor/jquery-1.11.1.min.js"></script>
+
+        <!-- Twitter bootstrap -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap-theme.min.css">
+        <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Custom scripts -->
+        <script src="/js/bundle.js"></script>
+
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/css/bundle.css">
+    </head>
+
+    <body>
+        <div id="wrapper">

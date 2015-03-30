@@ -1,0 +1,22 @@
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="/">BeerDB</a>
+                    </li>
+                    <li>
+                        <a href="/view">View Tables</a>
+                    </li>
+                    <li>
+                        <a href="/create">Create Table</a>
+                    </li>
+                    <li>
+                        <a href="/search">Search</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
