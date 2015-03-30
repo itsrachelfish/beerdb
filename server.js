@@ -5,6 +5,7 @@ var app = express();
 var server = require('http').createServer(app);
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
+var bodyParser = require('body-parser');
 
 var login = require("./login/sdk/server/wetfish-login");
 var config = require("./config.js");
@@ -24,6 +25,9 @@ app.use(session({
     store: new RedisStore({client: model.redis}),
     secret: config.session.secret
 }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(__dirname + '/static'));
 

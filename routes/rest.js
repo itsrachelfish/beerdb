@@ -9,7 +9,7 @@ module.exports = function(app)
     // Create a new table
     app.post('/v1/table', function(req, res)
     {
-
+        res.end(JSON.stringify(req.body));
     });
 
     // List data from a table
