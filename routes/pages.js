@@ -16,7 +16,16 @@ module.exports = function(app)
 
     app.get('/view', function(req, res)
     {
-        res.end("View all tables");
+        res.render('view',
+        {
+            session: req.session,
+            partials:
+            {
+                head: 'partials/head',
+                sidebar: 'partials/sidebar',
+                foot: 'partials/foot'
+            }
+        });
     });
 
     app.get('/create', function(req, res)
@@ -35,6 +44,15 @@ module.exports = function(app)
 
     app.get('/search', function(req, res)
     {
-        res.end("Search for something");
+        res.render('search',
+        {
+            session: req.session,
+            partials:
+            {
+                head: 'partials/head',
+                sidebar: 'partials/sidebar',
+                foot: 'partials/foot'
+            }
+        });
     });
 }

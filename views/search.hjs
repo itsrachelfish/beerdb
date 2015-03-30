@@ -1,0 +1,5 @@
+{{> head}}
+    {{> sidebar}}
+
+    [Pretend this is a search box]
+{{> foot}}
