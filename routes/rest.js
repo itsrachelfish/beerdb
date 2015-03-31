@@ -1,25 +1,101 @@
-module.exports = function(app)
+module.exports = function(app, event)
 {
+    // Middleware to ensure users are logged in
+    app.use(function(req, res, next)
+    {
+        if(!req.session.user)
+        {
+            event.emit('message', req, res, {type: 'error', text: 'You must be logged in to use BeerDB!'});
+            return;
+        }
+
+        next();
+    });
+    
+    // Create a new table
+    app.post('/v1/table', function(req, res)
+    {
+        var error = false;
+        var errors = {};
+        
+        if(!req.body.table)
+        {
+            error = true;
+            errors.table = "Your table needs a name!";
+        }
+
+        if(!Array.isArray(req.body.column) || !Array.isArray(req.body.type))
+        {
+            error = true;
+            errors.table = "You didn't create any columns!";
+        }
+
+        else if(req.body.column.length != req.body.type.length)
+        {
+            error = true;
+            errors.table = "Spooky hacker!";
+        }
+
+        else
+        {
+            errors.column = [];
+            errors.type = [];
+            var types = ['label', 'text', 'list', 'number', 'range'];
+            
+            for(var i = 0, l = req.body.column.length; i < l; i++)
+            {
+                var column = req.body.column[i].trim();
+                var type = req.body.type[i].trim();
+
+                // Ignore completely empty columns
+                if(!column && !type)
+                {
+                    continue;
+                }
+
+                if(!column)
+                {
+                    error = true;
+                    errors.column[i] = "You must specify a column name!";
+                }
+
+                if(!type)
+                {
+                    error = true;
+                    errors.type[i] = "This colum needs a type!";
+                }
+
+                else if(types.indexOf(type) == -1)
+                {
+                    error = true;
+                    errors.type[i] = "This isn't a valid type you goose.";
+                }
+            }
+        }
+
+        if(error)
+        {
+            res.end(JSON.stringify(errors));
+            return;
+        }
+
+        res.end("Yippie!");
+    });
+
     // List tables
     app.get('/v1/table', function(req, res)
     {
 
     });
 
-    // Create a new table
-    app.post('/v1/table', function(req, res)
+    // Add data to a table
+    app.post('/v1/:table', function(req, res)
     {
-        res.end(JSON.stringify(req.body));
+
     });
 
     // List data from a table
     app.get('/v1/:table', function(req, res)
-    {
-
-    });
-
-    // Add data to a table
-    app.post('/v1/:table', function(req, res)
     {
 
     });

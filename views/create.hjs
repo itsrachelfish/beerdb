@@ -24,11 +24,11 @@
         <div class="form-group column-template hidden">
             <label class="col-sm-3 control-label">Column</label>
             <div class="col-sm-5">
-                <input name="column" class="form-control" placeholder="A column in your table">
+                <input name="column[]" class="form-control" placeholder="A column in your table">
             </div>
 
             <div class="col-sm-3">
-                <select name="type" class="form-control">
+                <select name="type[]" class="form-control">
                     <option value="">Type</option>
 
                     <option value="label">Label (used for sorting)</option>
