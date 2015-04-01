@@ -1,7 +1,4 @@
-var redis = require('redis');
-var mysql = require('mysql');
 var express = require('express');
-
 var app = express();
 var server = require('http').createServer(app);
 var session = require('express-session');
@@ -13,14 +10,13 @@ var events = require('events')
 var event = new events.EventEmitter();
 
 var config = require("./config.js");
+var model = require('./model');
 
-server.listen(3000);
+// Connect to redis and MySQL
+model.connect(config);
+
+server.listen(2334);
 console.log("BeerDB server started");
-
-var model =
-{
-    redis: redis.createClient()
-};
 
 // Use the existing connection for session data
 app.use(session({
@@ -86,4 +82,4 @@ event.on('message', function(req, res, message)
 
 require('./routes/login')(app, event);
 require('./routes/pages')(app, event);
-require('./routes/rest')(app, event);
+require('./routes/rest')(app, event, model);

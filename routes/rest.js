@@ -1,4 +1,4 @@
-module.exports = function(app, event)
+module.exports = function(app, event, model)
 {
     // Middleware to ensure users are logged in
     app.use(function(req, res, next)
