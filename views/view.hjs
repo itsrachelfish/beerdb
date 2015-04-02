@@ -1,5 +1,0 @@
-{{> head}}
-    {{> sidebar}}
-
-    [Insert list of tables here]
-{{> foot}}

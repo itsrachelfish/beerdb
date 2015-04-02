@@ -6,10 +6,12 @@ var model =
     // Database connection variables
     redis: false,
     mysql: false,
+    config: false,
 
     // Function to connect to our databases
     connect: function(config)
     {
+        model.config = config;
         model.redis = redis.createClient(6334);
         model.mysql = mysql.createConnection(
         {
@@ -120,10 +122,23 @@ var model =
             query.push(columns);
 
             query.push(')');
-            query.push("ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+            query.push('ENGINE=MyISAM DEFAULT CHARSET=utf8;');
 
             query = query.join(' ');
             model.mysql.query(query, data, callback);
+        },
+
+        list: function(callback)
+        {
+            var query =
+            [
+                'Select table_name as name',
+                'from information_schema.tables',
+                'where table_schema = ?'
+            ];
+
+            query = query.join(' ');
+            model.mysql.query(query, model.config.mysql.database, callback);
         }
     }
 };

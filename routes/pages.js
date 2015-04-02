@@ -1,4 +1,4 @@
-module.exports = function(app, event)
+module.exports = function(app, event, model)
 {
     // Middleware to ensure users are logged in
     app.use(function(req, res, next)
@@ -14,12 +14,28 @@ module.exports = function(app, event)
     
     app.get('/', function(req, res)
     {
-        event.emit('render', req, res, {view: 'index'});        
+        event.emit('render', req, res, {view: 'index'});
     });
 
-    app.get('/view', function(req, res)
+    app.get('/view/:table?', function(req, res)
     {
-        event.emit('render', req, res, {view: 'view'});
+        if(req.params.table)
+        {
+            event.emit('message', req, res, {type: 'info', text: "You want: " + req.params.table});
+            return;
+        }
+        
+        model.table.list(function(error, response)
+        {
+            if(error)
+            {
+                console.log(error);
+                event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                return;
+            }
+
+            event.emit('render', req, res, {view: 'list', tables: response});
+        });
     });
 
     app.get('/create', function(req, res)

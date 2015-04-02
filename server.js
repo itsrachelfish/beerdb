@@ -80,6 +80,6 @@ event.on('message', function(req, res, message)
     event.emit('render', req, res, options);
 });
 
-require('./routes/login')(app, event);
-require('./routes/pages')(app, event);
+require('./routes/login')(app, event, model);
+require('./routes/pages')(app, event, model);
 require('./routes/rest')(app, event, model);

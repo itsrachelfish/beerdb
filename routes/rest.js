@@ -106,7 +106,17 @@ module.exports = function(app, event, model)
     // List tables
     app.get('/v1/table', function(req, res)
     {
+        model.table.list(function(error, response)
+        {
+            if(error)
+            {
+                console.log(error);
+                res.end(JSON.stringify({status: 'error', message: 'There was a SQL error.'}));
+                return;
+            }
 
+            res.end(JSON.stringify(response));
+        });
     });
 
     // Add data to a table
