@@ -17,11 +17,17 @@ module.exports = function(app, event, model)
     {
         var error = false;
         var errors = {};
+        var table = {columns: []};
         
-        if(!req.body.table)
+        if(!req.body.table || !req.body.table.trim())
         {
             error = true;
             errors.table = "Your table needs a name!";
+        }
+
+        else
+        {
+            table.name = req.body.table.toLowerCase().trim();
         }
 
         if(!Array.isArray(req.body.column) || !Array.isArray(req.body.type))
@@ -70,6 +76,11 @@ module.exports = function(app, event, model)
                     error = true;
                     errors.type[i] = "This isn't a valid type you goose.";
                 }
+                
+                else
+                {
+                    table.columns.push({name: column.toLowerCase(), type: type});
+                }
             }
         }
 
@@ -79,7 +90,17 @@ module.exports = function(app, event, model)
             return;
         }
 
-        res.end("Yippie!");
+        model.table.create(table, function(error, response)
+        {
+            if(error)
+            {
+                console.log(error);
+                res.end(JSON.stringify({status: 'error', message: 'There was a SQL error.'}));
+                return;
+            }
+            
+            res.end(JSON.stringify({status: 'success', message: 'Table created!'}));
+        });
     });
 
     // List tables
