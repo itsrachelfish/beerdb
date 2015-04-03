@@ -1,2 +1,4 @@
 require('jquery');
-require('./create');
+
+require('./misc/dragon-drop');
+require('./pages/create');
