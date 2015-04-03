@@ -139,6 +139,54 @@ var model =
 
             query = query.join(' ');
             model.mysql.query(query, model.config.mysql.database, callback);
+        },
+
+        info: function(table, callback)
+        {
+            model.mysql.query('Describe ??', table, function(error, response)
+            {
+                if(error)
+                {
+                    callback(error, response);
+                    return;
+                }
+
+                var columns = [];
+
+                for(var i = 0, l = response.length; i < l; i++)
+                {
+                    var column = response[i];
+                    var output =
+                    {
+                        name: column.Field
+                    };
+
+                    if(column.Key == 'PRI')
+                    {
+                        output.name = 'id';
+                    }
+
+                    if(column.Type.match(/^(int|varchar)/))
+                    {
+                        output.sortable = true;
+                    }
+
+                    if(output.name.match(/_min$/))
+                    {
+                        output.name = output.name.replace('_min', '');
+                    }
+
+                    // Skip range max fields
+                    if(output.name.match(/_max$/))
+                    {
+                        continue;
+                    }
+
+                    columns.push(output);
+                }
+
+                callback(error, columns);
+            });
         }
     }
 };
