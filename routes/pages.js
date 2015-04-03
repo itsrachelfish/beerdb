@@ -17,14 +17,35 @@ module.exports = function(app, event, model)
         event.emit('render', req, res, {view: 'index'});
     });
 
-    app.get('/view/:table?', function(req, res)
+    app.get('/view/:table', function(req, res)
     {
-        if(req.params.table)
+        model.table.info(req.params.table, function(error, columns)
         {
-            event.emit('message', req, res, {type: 'info', text: "You want: " + req.params.table});
-            return;
-        }
-        
+            if(error)
+            {
+                console.log(error);
+                event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                return;
+            }
+
+            var sortable = [];
+
+            for(var i = 0, l = columns.length; i < l; i++)
+            {
+                var column = columns[i];
+
+                if(column.sortable)
+                {
+                    sortable.push(column);
+                }
+            }
+            
+            event.emit('render', req, res, {view: 'table', table: req.params.table, columns: columns, sortable: sortable});
+        });
+    });
+    
+    app.get('/view', function(req, res)
+    {
         model.table.list(function(error, response)
         {
             if(error)

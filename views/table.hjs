@@ -1,0 +1,21 @@
+{{> head}}
+    {{> sidebar}}
+
+    <h2>Viewing Table: {{table}}</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {{#sortable}}
+                    <th>{{name}}</th>
+                {{/sortable}}
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+
+{{> foot}}
