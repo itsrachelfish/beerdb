@@ -1,12 +1,12 @@
 {{> head}}
     {{> sidebar}}
 
-    <div class="create">
+    <div class="create form-wrap">
         <form action="/v1/table" method="post" class="form-horizontal" role="form">
             <div class="form-content">
                 <div class="form-group movable">
                     <label class="col-sm-3 control-label">Table</label>
-                    <div class="col-sm-9">
+                    <div class="input-wrap col-sm-9">
                         <input name="table" class="form-control" placeholder="A name for your new table">
                     </div>
                 </div>
@@ -23,11 +23,11 @@
         <!-- Hidden column template, cloned by jQuery -->
         <div class="form-group column-template hidden">
             <label class="col-sm-3 control-label">Column</label>
-            <div class="col-sm-5">
+            <div class="input-wrap col-sm-5">
                 <input name="column[]" class="form-control" placeholder="A column in your table">
             </div>
 
-            <div class="col-sm-3">
+            <div class="input-wrap col-sm-3">
                 <select name="type[]" class="form-control">
                     <option value="">Type</option>
 

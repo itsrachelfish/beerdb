@@ -33,13 +33,13 @@ module.exports = function(app, event, model)
         if(!Array.isArray(req.body.column) || !Array.isArray(req.body.type))
         {
             error = true;
-            errors.table = "You didn't create any columns!";
+            errors.unknown = "You didn't create any columns!";
         }
 
         else if(req.body.column.length != req.body.type.length)
         {
             error = true;
-            errors.table = "Spooky hacker!";
+            errors.unknown = "Spooky hacker!";
         }
 
         else
@@ -84,9 +84,16 @@ module.exports = function(app, event, model)
             }
         }
 
+        // If no valid columns were created
+        if(!table.columns.length)
+        {
+            error = true;
+            errors.unknown = "You didn't create any columns!";
+        }
+
         if(error)
         {
-            res.end(JSON.stringify(errors));
+            res.end(JSON.stringify({status: 'error', errors: errors}));
             return;
         }
 
