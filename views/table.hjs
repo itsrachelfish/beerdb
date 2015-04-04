@@ -1,8 +1,15 @@
 {{> head}}
     {{> sidebar}}
 
-    <h2>Viewing Table: {{table}}</h2>
+    <h2>
+        Viewing Table: {{table.name}}
 
+        <div class="pull-right">
+            <a href="/insert/{{table.url}}" class="btn btn-success add-column">Add Row</a>
+            <a href="/search/{{table.url}}" class="btn btn-primary">Search Table</a>
+        </div>
+    </h2>
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -33,4 +40,8 @@
         </tbody>
     </table>
 
+    <div class="pull-right">
+        <a href="/insert/{{table.url}}" class="btn btn-success add-column">Add Row</a>
+        <a href="/search/{{table.url}}" class="btn btn-primary">Search Table</a>
+    </div>
 {{> foot}}

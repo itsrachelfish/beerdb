@@ -124,10 +124,7 @@ module.exports = function(app, event, model)
                     rows.push(row);
                 }
 
-console.log(sortable);
-console.log(rows);
-
-                event.emit('render', req, res, {view: 'table', table: table, columns: columns, rows: rows});
+                event.emit('render', req, res, {view: 'table', table: {url: table, name: titleCase(table)}, columns: columns, rows: rows});
             });
         });
     });
@@ -143,8 +140,19 @@ console.log(rows);
                 return;
             }
 
+            response.forEach(function(table, index)
+            {
+                response[index].url = table.name;
+                response[index].name = titleCase(table.name);
+            });
+
             event.emit('render', req, res, {view: 'list', tables: response});
         });
+    });
+
+    app.get('/insert/:table', function(req, res)
+    {
+        event.emit('message', req, res, {type: 'info', text: 'Insert data into ' + req.params.table});
     });
 
     app.get('/create', function(req, res)
@@ -152,7 +160,7 @@ console.log(rows);
         event.emit('render', req, res, {view: 'create'});
     });
 
-    app.get('/search', function(req, res)
+    app.get('/search/:table?/:query?', function(req, res)
     {
         event.emit('render', req, res, {view: 'search'});
     });

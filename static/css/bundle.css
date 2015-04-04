@@ -102,3 +102,6 @@
   #wrapper.toggled #page-content-wrapper {
     position: relative;
     margin-right: 0; } }
+
+.form-wrap {
+  margin-top: 20px; }

@@ -1,11 +1,11 @@
 {{> head}}
     {{> sidebar}}
 
-    <h2>Tables</h2>
+    <h2>List of Tables</h2>
 
     <ul>
         {{#tables}}
-            <li><a href="/view/{{name}}">{{name}}</a></li>
+            <li><a href="/view/{{url}}">{{name}}</a></li>
         {{/tables}}
     </ul>
 {{> foot}}
