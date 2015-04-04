@@ -6,15 +6,30 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                {{#sortable}}
+                {{#columns}}
                     <th>{{name}}</th>
-                {{/sortable}}
+                {{/columns}}
             </tr>
         </thead>
 
         <tbody>
-            <tr>
-            </tr>
+            {{#rows}}
+                <tr>
+                    {{#sortable}}
+                        <td>{{value}}</th>
+                    {{/sortable}}
+                </tr>
+
+                <tr>
+                    <td colspan="{{sortable.length}}">
+                        {{#text}}
+                            <p>
+                                <b>{{name}}</b> - {{value}}
+                            </p>
+                        {{/text}}
+                    </td>
+                </td>
+            {{/rows}}
         </tbody>
     </table>
 

@@ -187,6 +187,29 @@ var model =
 
                 callback(error, columns);
             });
+        },
+
+        select: function(table, select, callback)
+        {
+            var limit = 1;
+
+            if(select.limit)
+            {
+                limit = parseInt(select.limit);
+                delete select.limit;
+            }
+
+            // If the select statement is empty
+            if(!Object.keys(select).length)
+            {
+                model.mysql.query("Select * from ?? limit "+limit, table, callback);
+            }
+            else
+            {
+                select = model.where(select);
+                select.values.unshift(table);
+                model.mysql.query("Select * from ?? where "+select.where+" limit "+limit, select.values, callback);
+            }
         }
     }
 };
