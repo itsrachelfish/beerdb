@@ -73,7 +73,11 @@ var model =
                     data.push(column.name);
 
                     columns.push('KEY ?? (??)');
+                    data.push('sort ' + column.name);
                     data.push(column.name);
+
+                    columns.push('FULLTEXT KEY ?? (??)');
+                    data.push('text ' + column.name);
                     data.push(column.name);
                 }
 
@@ -83,7 +87,7 @@ var model =
                     data.push(column.name);
 
                     columns.push('FULLTEXT KEY ?? (??)');
-                    data.push(column.name);
+                    data.push('text ' + column.name);
                     data.push(column.name);
                 }
 
@@ -93,7 +97,7 @@ var model =
                     data.push(column.name);
 
                     columns.push('KEY ?? (??)');
-                    data.push(column.name);
+                    data.push('sort ' + column.name);
                     data.push(column.name);
                 }
 
@@ -104,14 +108,14 @@ var model =
                     data.push(column.name + "_min");
 
                     columns.push('KEY ?? (??)');
-                    data.push(column.name + "_min");
+                    data.push('sort ' + column.name + "_min");
                     data.push(column.name + "_min");
 
                     columns.push('?? int NOT NULL');
                     data.push(column.name + "_max");
 
                     columns.push('KEY ?? (??)');
-                    data.push(column.name + "_max");
+                    data.push('sort ' + column.name + "_max");
                     data.push(column.name + "_max");
 
                 }
@@ -166,20 +170,33 @@ var model =
                         output.name = 'id';
                     }
 
-                    if(column.Type.match(/^(int|varchar)/))
+                    if(column.Type.match(/^int/))
                     {
                         output.sortable = true;
+                        output.type = 'Number';
+                    }
+
+                    if(column.Type.match(/^varchar/))
+                    {
+                        output.sortable = true;
+                        output.type = 'Label';
                     }
 
                     if(output.name.match(/_min$/))
                     {
                         output.name = output.name.replace('_min', '');
+                        output.type = 'Range';
                     }
 
                     // Skip range max fields
                     if(output.name.match(/_max$/))
                     {
                         continue;
+                    }
+
+                    if(column.Type.match(/^text/))
+                    {
+                        output.type = 'Text';
                     }
 
                     columns.push(output);

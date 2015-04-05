@@ -5,7 +5,7 @@
         Viewing Table: {{table.name}}
 
         <div class="pull-right">
-            <a href="/insert/{{table.url}}" class="btn btn-success add-column">Add Row</a>
+            <a href="/insert/{{table.url}}" class="btn btn-success">Add Row</a>
             <a href="/search/{{table.url}}" class="btn btn-primary">Search Table</a>
         </div>
     </h2>
@@ -40,8 +40,10 @@
         </tbody>
     </table>
 
-    <div class="pull-right">
-        <a href="/insert/{{table.url}}" class="btn btn-success add-column">Add Row</a>
-        <a href="/search/{{table.url}}" class="btn btn-primary">Search Table</a>
-    </div>
+    <h2>
+        <div class="pull-right">
+            <a href="/insert/{{table.url}}" class="btn btn-success">Add Row</a>
+            <a href="/search/{{table.url}}" class="btn btn-primary">Search Table</a>
+        </div>
+    </h2>
 {{> foot}}

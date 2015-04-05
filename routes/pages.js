@@ -152,7 +152,46 @@ module.exports = function(app, event, model)
 
     app.get('/insert/:table', function(req, res)
     {
-        event.emit('message', req, res, {type: 'info', text: 'Insert data into ' + req.params.table});
+        var table = req.params.table;
+        
+        model.table.info(table, function(error, response)
+        {
+            if(error)
+            {
+                console.log(error);
+                event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                return;
+            }
+
+            var sortable = [];
+            var text = [];
+
+            for(var i = 0, l = response.length; i < l; i++)
+            {
+                var column = response[i];
+                column.title = titleCase(column.name);
+
+                if(column.sortable)
+                {
+                    // Skip the ID column
+                    if(column.name == "id")
+                    {
+                        continue;
+                    }
+                    
+                    sortable.push(column);
+                }
+                else
+                {
+                    text.push(column);
+                }
+            }
+
+            // Size of the grid used for each column
+            var grid = Math.floor(12 / sortable.length);
+
+            event.emit('render', req, res, {view: 'insert', table: {url: table, title: titleCase(table)}, grid: grid, sortable: sortable, text: text});
+        });
     });
 
     app.get('/create', function(req, res)

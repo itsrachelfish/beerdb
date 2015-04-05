@@ -121,7 +121,7 @@ module.exports = function(app, event, model)
                 res.end(JSON.stringify({status: 'error', message: 'There was a SQL error.'}));
                 return;
             }
-
+            
             res.end(JSON.stringify(response));
         });
     });
@@ -129,7 +129,7 @@ module.exports = function(app, event, model)
     // Add data to a table
     app.post('/v1/:table', function(req, res)
     {
-
+        res.end(JSON.stringify({status: 'success', message: 'Yay xD'}));
     });
 
     // List data from a table

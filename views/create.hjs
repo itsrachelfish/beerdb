@@ -35,7 +35,7 @@
 
                     <option value="label">Label (used for sorting)</option>
                     <option value="text">Text (searchable blocks of text)</option>
-                    <option value="list">List (like text, but specifically in list format)</option>
+                 <!--   <option value="list">List (like text, but specifically in list format)</option> -->
                     <option value="number">Number (used for single numbers)</option>
                     <option value="range">Range (used for ranges of numbers)</option>
                 </select>
