@@ -36,6 +36,8 @@ $(document).ready(function()
                 response = {'status': 'error', 'message': 'Unable to decode the response from the server.'};
             }
 
+            $(window).trigger('form-loaded', response);
+
             if(response.status == 'success')
             {
                 var message = $('<div class="alert alert-success" style="display:none" role="alert"><strong>Success!</strong> '+response.message+'</div>');

@@ -23,7 +23,7 @@
             {{#rows}}
                 <tr>
                     {{#sortable}}
-                        <td>{{value}}</th>
+                        <td>{{value}}</td>
                     {{/sortable}}
                 </tr>
 

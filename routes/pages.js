@@ -78,7 +78,7 @@ module.exports = function(app, event, model)
             {
                 if(error)
                 {
-                    co0nsole.log(error);
+                    console.log(error);
                     event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
                     return;
                 }
@@ -177,6 +177,11 @@ module.exports = function(app, event, model)
                     if(column.name == "id")
                     {
                         continue;
+                    }
+
+                    if(column.type == 'Range')
+                    {
+                        column.range = true;
                     }
                     
                     sortable.push(column);

@@ -17,7 +17,7 @@
                 <thead>
                     <tr>
                         {{#sortable}}
-                            <td>{{title}}</th>
+                            <th>{{title}}</th>
                         {{/sortable}}
                     </tr>
                 </thead>
@@ -25,7 +25,16 @@
                 <tbody>
                     <tr>
                         {{#sortable}}
-                            <td><input name="column[]" class="form-control" placeholder="{{type}}"></th>
+                            {{#range}}
+                                <td class="form-inline">
+                                    <input name="{{name}}_min" class="form-control" style="max-width: 46%" placeholder="Range (Min)">&ensp;
+                                    <input name="{{name}}_max" class="form-control" style="max-width: 46%" placeholder="Range (Max)">
+                                </td>
+                            {{/range}}
+
+                            {{^range}}
+                                <td><input name="{{name}}" class="form-control" placeholder="{{type}}"></td>
+                            {{/range}}
                         {{/sortable}}
                     </tr>
 
@@ -38,7 +47,7 @@
                                     </div>
 
                                     <div class="col-sm-11">
-                                        <textarea class="form-control" placeholder="{{type}}"></textarea>
+                                        <textarea class="form-control" name="{{name}}" placeholder="{{type}}"></textarea>
                                     </div>
                                 </div>
                             {{/text}}
@@ -54,4 +63,7 @@
             </div>
         </form>
     </div>    
+
+    <a href="/insert/{{table.url}}" class="btn btn-success add-another hidden">Add Another Row</a>
+    
 {{> foot}}

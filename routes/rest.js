@@ -129,7 +129,41 @@ module.exports = function(app, event, model)
     // Add data to a table
     app.post('/v1/:table', function(req, res)
     {
-        res.end(JSON.stringify({status: 'success', message: 'Yay xD'}));
+        var error = false;
+        var errors = {};
+        var empty = true;
+
+        Object.keys(req.body).forEach(function(column)
+        {
+            if(req.body[column].trim())
+            {
+                empty = false;
+            }
+        });
+
+        if(empty)
+        {
+            error = true;
+            errors.unknown = "You didn't enter anything!";
+        }
+
+        if(error)
+        {
+            res.end(JSON.stringify({status: 'error', errors: errors}));
+            return;
+        }
+
+        model.table.insert(req.params.table, req.body, function(error, response)
+        {
+            if(error)
+            {
+                console.log(error);
+                res.end(JSON.stringify({status: 'error', message: 'There was a SQL error.'}));
+                return;
+            }
+            
+            res.end(JSON.stringify({status: 'success', message: 'New row created!'}));
+        });
     });
 
     // List data from a table

@@ -227,6 +227,11 @@ var model =
                 select.values.unshift(table);
                 model.mysql.query("Select * from ?? where "+select.where+" limit "+limit, select.values, callback);
             }
+        },
+
+        insert: function(table, data, callback)
+        {
+            model.mysql.query("Insert into ?? set ?", [table, data], callback);
         }
     }
 };
