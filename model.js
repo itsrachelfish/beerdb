@@ -232,6 +232,44 @@ var model =
         insert: function(table, data, callback)
         {
             model.mysql.query("Insert into ?? set ?", [table, data], callback);
+        },
+
+        search: function(table, select, callback)
+        {
+            var query = [];
+            var data = [];
+            var score = [];
+            
+            query.push('Select *');
+
+            select.columns.forEach(function(column, index)
+            {
+                query.push(', match(??) against(? in boolean mode) as score' + index);
+                data.push(column, select.query);
+
+                score.push('score' + index);
+            });
+
+            query.push('from ??');
+            data.push(table);
+
+            var glue = 'where';
+
+            select.columns.forEach(function(column, index)
+            {
+                query.push(glue + ' match(??) against(? in boolean mode)');
+                data.push(column, select.query);
+
+                if(glue == 'where')
+                {
+                    glue = 'or';
+                }
+            });
+            
+            query.push('order by (' + score.join(' + ') + ') desc');
+            query = query.join(' ');
+
+            model.mysql.query(query, data, callback);
         }
     }
 };

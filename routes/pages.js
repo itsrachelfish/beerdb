@@ -192,10 +192,7 @@ module.exports = function(app, event, model)
                 }
             }
 
-            // Size of the grid used for each column
-            var grid = Math.floor(12 / sortable.length);
-
-            event.emit('render', req, res, {view: 'insert', table: {url: table, title: titleCase(table)}, grid: grid, sortable: sortable, text: text});
+            event.emit('render', req, res, {view: 'insert', table: {url: table, title: titleCase(table)}, sortable: sortable, text: text});
         });
     });
 
@@ -204,8 +201,165 @@ module.exports = function(app, event, model)
         event.emit('render', req, res, {view: 'create'});
     });
 
-    app.get('/search/:table?/:query?', function(req, res)
+    app.get('/search', function(req, res)
     {
-        event.emit('render', req, res, {view: 'search'});
+        model.table.list(function(error, response)
+        {
+            if(error)
+            {
+                console.log(error);
+                event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                return;
+            }
+
+            response.forEach(function(table, index)
+            {
+                response[index].url = table.name;
+                response[index].name = titleCase(table.name);
+            });
+
+            event.emit('render', req, res, {view: 'search-list', tables: response});
+        });
+    });
+    
+    app.get('/search/:table', function(req, res)
+    {
+        var table = req.params.table;
+
+        // Display search results
+        if(req.query.search)
+        {
+            model.table.info(table, function(error, response)
+            {
+                if(error)
+                {
+                    console.log(error);
+                    event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                    return;
+                }
+
+                var sortable = {};
+                var columns = [];
+
+                for(var i = 0, l = response.length; i < l; i++)
+                {
+                    var column = response[i];
+
+                    if(column.sortable)
+                    {
+                        var name = column.name;
+
+                        // Add the table name back to the ID
+                        if(name == "id")
+                        {
+                            name = table + "_id";
+                            column.name = "ID";
+                        }
+                        else
+                        {
+                            column.name = titleCase(column.name);
+                        }
+                        
+                        sortable[name] = true;
+                        columns.push(column);
+                    }
+                }
+
+                var select =
+                {
+                    columns: req.query.from,
+                    query: req.query.search + '*' // Add an * at the end to allow partial matches
+                }
+                
+                model.table.search(table, select, function(error, response)
+                {
+                    if(error)
+                    {
+                        console.log(error);
+                        event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                        return;
+                    }
+
+                    var rows = [];
+
+                    for(var i = 0, l = response.length; i < l; i++)
+                    {
+                        var row = {sortable: [], text: [], range: {}};
+
+                        Object.keys(response[i]).forEach(function(column)
+                        {
+                            var value = response[i][column];
+                            var range = column.match(/^(.+)(_min|_max)$/);
+                            var score = column.match(/^score[0-9]+$/);
+
+                            // Skip score columns
+                            if(score)
+                            {
+                                return;
+                            }
+
+                            if(range)
+                            {
+                                if(range[2] == "_min")
+                                {
+                                    // Save the minimum in the row's range object
+                                    row.range[range[1]] = value;
+                                }
+                                else
+                                {
+                                    // Save the final range value
+                                    var total = row.range[range[1]] + " - " + value;                                
+                                    row.sortable.push({name: titleCase(range[1]), value: total});
+                                }
+                            }
+                            else
+                            {
+                                if(sortable[column])
+                                {
+                                    row.sortable.push({name: titleCase(column), value: value});
+                                }
+                                else
+                                {
+                                    row.text.push({name: titleCase(column), value: value});
+                                }
+                            }
+                        });
+
+                        rows.push(row);
+                    }
+
+                    event.emit('render', req, res, {view: 'search-results', table: {url: table, name: titleCase(table)}, columns: columns, rows: rows});
+                });
+            });
+        }
+
+        // Else, display search page
+        else
+        {
+            model.table.info(table, function(error, response)
+            {
+                if(error)
+                {
+                    console.log(error);
+                    event.emit('message', req, res, {type: 'error', text: 'There was a SQL error!'});
+                    return;
+                }
+
+                var searchable = [];
+
+                for(var i = 0, l = response.length; i < l; i++)
+                {
+                    var column = response[i];
+                    column.title = titleCase(column.name);
+
+                    if(column.type == 'Label' || column.type == 'Text')
+                    {
+                        searchable.push(column);
+                    }
+                }
+
+                event.emit('render', req, res, {view: 'search', table: {url: table, title: titleCase(table)}, searchable: searchable});
+            });
+        }
     });
 }

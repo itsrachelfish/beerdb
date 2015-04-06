@@ -1,0 +1,11 @@
+{{> head}}
+    {{> sidebar}}
+
+    <h2>Pick a Table to Search</h2>
+
+    <ul>
+        {{#tables}}
+            <li><a href="/search/{{url}}">{{name}}</a></li>
+        {{/tables}}
+    </ul>
+{{> foot}}

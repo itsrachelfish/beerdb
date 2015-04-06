@@ -1,0 +1,49 @@
+{{> head}}
+    {{> sidebar}}
+
+    <h2>
+        Viewing Table: {{table.name}}
+
+        <div class="pull-right">
+            <a href="/view/{{table.url}}" class="btn btn-success">View All Rows</a>
+            <a href="/search/{{table.url}}" class="btn btn-primary">Search Again</a>
+        </div>
+    </h2>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {{#columns}}
+                    <th>{{name}}</th>
+                {{/columns}}
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#rows}}
+                <tr>
+                    {{#sortable}}
+                        <td>{{value}}</td>
+                    {{/sortable}}
+                </tr>
+
+                <tr>
+                    <td colspan="{{sortable.length}}">
+                        {{#text}}
+                            <p>
+                                <b>{{name}}</b> - {{value}}
+                            </p>
+                        {{/text}}
+                    </td>
+                </td>
+            {{/rows}}
+        </tbody>
+    </table>
+
+    <h2>
+        <div class="pull-right">
+            <a href="/view/{{table.url}}" class="btn btn-success">View All Rows</a>
+            <a href="/search/{{table.url}}" class="btn btn-primary">Search Again</a>
+        </div>
+    </h2>
+{{> foot}}

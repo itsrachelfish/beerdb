@@ -14,7 +14,7 @@ function redirect(url, timeout)
 
 $(document).ready(function()
 {
-    $('body').on('submit', 'form', function(event)
+    $('body').on('submit', '.form-wrap form', function(event)
     {
         event.preventDefault();
 

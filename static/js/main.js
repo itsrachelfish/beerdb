@@ -3,3 +3,4 @@ require('./misc/dragon-drop');
 
 require('./pages/create');
 require('./pages/insert');
+require('./pages/search');

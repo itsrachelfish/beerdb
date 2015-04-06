@@ -1,5 +1,41 @@
 {{> head}}
     {{> sidebar}}
 
-    [Pretend this is a search box]
+    <h2>
+        Searching Within: {{table.title}}
+
+        <div class="pull-right">
+            <a href="/view/{{table.url}}" class="btn btn-success">View All Rows</a>
+            <a href="/insert/{{table.url}}" class="btn btn-primary">Add New Row</a>
+        </div>
+    </h2>
+
+
+    <div class="search">
+        <form action="/search/{{table.url}}" method="get" class="form-horizontal" role="form">
+            <br>
+            <b>Searchable fields:</b>
+            {{#searchable}}
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="from[]" value="{{name}}" checked> {{title}}
+                    </label>
+                </div>
+            {{/searchable}}
+
+            <div class="row">
+                <br>
+                <div class="col-sm-12">
+                    <input class="form-control" name="search" placeholder="Searching for...">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="submit" value="Search" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div> <!-- / .search -->
+
 {{> foot}}
