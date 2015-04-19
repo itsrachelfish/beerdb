@@ -14,7 +14,12 @@
         <thead>
             <tr>
                 {{#columns}}
-                    <th>{{name}}</th>
+                    <th>
+                        {{name}}
+
+                        <span class="glyphicon glyphicon-chevron-up sort-asc" title="Sort A-Z"></span>
+                        <span class="glyphicon glyphicon-chevron-down sort-desc" title="Sort Z-A"></span>
+                    </th>
                 {{/columns}}
             </tr>
         </thead>
