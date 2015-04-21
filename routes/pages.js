@@ -62,11 +62,12 @@ module.exports = function(app, event, model)
                     if(name == "id")
                     {
                         name = table + "_id";
-                        column.name = "ID";
+                        column.name = name;
+                        column.title = "ID";
                     }
                     else
                     {
-                        column.name = titleCase(column.name);
+                        column.title = titleCase(column.name);
                     }
                     
                     sortable[name] = true;
@@ -253,11 +254,12 @@ module.exports = function(app, event, model)
                         if(name == "id")
                         {
                             name = table + "_id";
-                            column.name = "ID";
+                            column.name = name;
+                            column.title = "ID";
                         }
                         else
                         {
-                            column.name = titleCase(column.name);
+                            column.title = titleCase(column.name);
                         }
                         
                         sortable[name] = true;

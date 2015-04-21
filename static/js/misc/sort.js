@@ -2,13 +2,17 @@ $(document).ready(function()
 {
     $('body').on('click', '.sort-asc', function()
     {
-        var sort = $(this).parents('th').text();
-        console.log(sort, "asc!");
+        var column = $(this).parents('th').data('column');
+        var type = $(this).parents('th').data('type');
+        
+        console.log(column, type, "asc!");
     });
 
     $('body').on('click', '.sort-desc', function()
     {
-        var sort = $(this).parents('th').text();
-        console.log(sort, "desc!");
+        var column = $(this).parents('th').data('column');
+        var type = $(this).parents('th').data('type');
+
+        console.log(column, type, "desc!");
     });
 });
