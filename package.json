@@ -21,7 +21,8 @@
     "express-session": "*",
     "connect-redis": "*",
     "hjs": "0.0.6",
-    "body-parser": "~1.12.2"
+    "body-parser": "~1.12.2",
+    "query-string": "~1.0.0"
   },
   "devDependencies": {
     "gulp": "~3.8.11",
