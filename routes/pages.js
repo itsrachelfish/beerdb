@@ -75,7 +75,19 @@ module.exports = function(app, event, model)
                 }
             }
 
-            model.table.select(table, {limit: 50}, function(error, response)
+            var select = {limit: 50}
+
+            if(req.query.column)
+            {
+                select.order = req.query.column;
+            }
+
+            if(req.query.sort)
+            {
+                select.sort = req.query.sort;
+            }
+
+            model.table.select(table, select, function(error, response)
             {
                 if(error)
                 {

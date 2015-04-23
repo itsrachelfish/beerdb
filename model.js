@@ -245,7 +245,8 @@ var model =
             {
                 select = model.where(select);
                 select.values.unshift(table);
-                select.values.unshift(order);
+                select.values.push(order);
+
                 model.mysql.query("Select * from ?? where "+select.where+" order by ?? "+sort+" limit "+limit, select.values, callback);
             }
         },
