@@ -284,6 +284,16 @@ module.exports = function(app, event, model)
                     columns: req.query.from,
                     query: req.query.search + '*' // Add an * at the end to allow partial matches
                 }
+
+                if(req.query.column)
+                {
+                    select.order = req.query.column;
+                }
+
+                if(req.query.sort)
+                {
+                    select.sort = req.query.sort;
+                }
                 
                 model.table.search(table, select, function(error, response)
                 {

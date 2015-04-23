@@ -261,6 +261,26 @@ var model =
             var query = [];
             var data = [];
             var score = [];
+            var order = false;
+            var sort = false;
+
+            if(select.order)
+            {
+                order = select.order;
+                delete select.order;
+            }
+
+            if(select.sort)
+            {
+                select.sort = select.sort.toLowerCase();
+                
+                if(select.sort == "desc" || select.sort == "asc")
+                {
+                    sort = select.sort;
+                }
+                
+                delete select.sort;
+            }
             
             query.push('Select *');
 
@@ -287,10 +307,18 @@ var model =
                     glue = 'or';
                 }
             });
-            
-            query.push('order by (' + score.join(' + ') + ') desc');
-            query = query.join(' ');
 
+            if(order)
+            {
+                query.push('order by ?? ' + sort);
+                data.push(order);
+            }
+            else
+            {
+                query.push('order by (' + score.join(' + ') + ') desc');
+            }
+            
+            query = query.join(' ');
             model.mysql.query(query, data, callback);
         }
     }
