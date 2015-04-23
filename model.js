@@ -209,6 +209,8 @@ var model =
         select: function(table, select, callback)
         {
             var limit = 1;
+            var order = table + "_id";
+            var sort = "asc";
 
             if(select.limit)
             {
@@ -216,16 +218,35 @@ var model =
                 delete select.limit;
             }
 
+            if(select.order)
+            {
+                order = select.order;
+                delete select.order;
+            }
+
+            if(select.sort)
+            {
+                select.sort = select.sort.toLowerCase();
+                
+                if(select.sort == "desc" || select.sort == "asc")
+                {
+                    sort = select.sort;
+                }
+                
+                delete select.sort;
+            }
+
             // If the select statement is empty
             if(!Object.keys(select).length)
             {
-                model.mysql.query("Select * from ?? limit "+limit, table, callback);
+                model.mysql.query("Select * from ?? order by ?? "+sort+" limit "+limit, [table, order], callback);
             }
             else
             {
                 select = model.where(select);
                 select.values.unshift(table);
-                model.mysql.query("Select * from ?? where "+select.where+" limit "+limit, select.values, callback);
+                select.values.unshift(order);
+                model.mysql.query("Select * from ?? where "+select.where+" order by ?? "+sort+" limit "+limit, select.values, callback);
             }
         },
 
