@@ -25,4 +25,10 @@ module.exports = function(app, event)
             event.emit('message', req, res, {type: 'success', text: "You're logged in!"});
         });
     });
+
+    app.get('/logout', function(req, res)
+    {
+        event.emit('message', req, res, {type: 'success', text: "You're logged out!"});
+        req.session.destroy();
+    });
 }
