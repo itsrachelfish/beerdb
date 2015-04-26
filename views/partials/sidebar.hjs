@@ -4,15 +4,27 @@
                     <li class="sidebar-brand">
                         <a href="/">BeerDB</a>
                     </li>
-                    <li>
-                        <a href="/view">View Tables</a>
-                    </li>
-                    <li>
-                        <a href="/create">Create Table</a>
-                    </li>
-                    <li>
-                        <a href="/search">Search</a>
-                    </li>
+
+                    {{#session.user}}
+                        <li>
+                            <a href="/view">View Tables</a>
+                        </li>
+                        <li>
+                            <a href="/create">Create Table</a>
+                        </li>
+                        <li>
+                            <a href="/search">Search</a>
+                        </li>
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    {{/session.user}}
+
+                    {{^session.user}}
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    {{/session.user}}
                 </ul>
             </div>
             <!-- /#sidebar-wrapper -->
