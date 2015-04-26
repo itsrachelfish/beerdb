@@ -32,6 +32,9 @@ app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hjs');
 
+// Store configuration options
+app.config = config;
+
 // Helper events
 event.on('render', function(req, res, options)
 {

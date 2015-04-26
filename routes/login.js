@@ -9,7 +9,7 @@ module.exports = function(app, event)
     {
         if(!req.query.token)
         {
-            res.redirect('https://login.wetfish.net/apps/join/2d8dc73a81b343cecf4256016ed8640f549016ceb4ffe34ac5925382cbb3a2c5');
+            res.redirect('https://login.wetfish.net/apps/join/' + app.config.login.app_id);
             return;
         }
         

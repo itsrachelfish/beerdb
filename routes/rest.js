@@ -9,6 +9,13 @@ module.exports = function(app, event, model)
             return;
         }
 
+        // Only allow users based on the config file
+        if(app.config.allowed.indexOf(req.session.user.user_name) < 0)
+        {
+            event.emit('message', req, res, {type: 'error', text: 'You are not authorized to use BeerDB!'});
+            return;
+        }
+
         next();
     });
     
