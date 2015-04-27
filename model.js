@@ -93,7 +93,7 @@ var model =
 
                 else if(column.type == "number")
                 {
-                    columns.push('?? int NOT NULL');
+                    columns.push('?? decimal(9, 1) NOT NULL');
                     data.push(column.name);
 
                     columns.push('KEY ?? (??)');
@@ -104,14 +104,14 @@ var model =
                 else if(column.type == "range")
                 {
                     // Ranges are actually two columns
-                    columns.push('?? int NOT NULL');
+                    columns.push('?? decimal(9, 1) NOT NULL');
                     data.push(column.name + "_min");
 
                     columns.push('KEY ?? (??)');
                     data.push('sort ' + column.name + "_min");
                     data.push(column.name + "_min");
 
-                    columns.push('?? int NOT NULL');
+                    columns.push('?? decimal(9, 1) NOT NULL');
                     data.push(column.name + "_max");
 
                     columns.push('KEY ?? (??)');
@@ -170,7 +170,7 @@ var model =
                         output.name = 'id';
                     }
 
-                    if(column.Type.match(/^int/))
+                    if(column.Type.match(/^int|decimal/))
                     {
                         output.sortable = true;
                         output.type = 'Number';
